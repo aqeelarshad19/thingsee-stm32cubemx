@@ -11,7 +11,7 @@ project(thingsee)
 set(CMAKE_BUILD_TYPE Debug)
 
 # set C++ standard to C++11
-# set (CMAKE_CXX_STANDARD 11)
+set (CMAKE_CXX_STANDARD 11)
 
 enable_language(ASM)
 
@@ -45,6 +45,7 @@ include_directories(
     Drivers/CMSIS/Include
     Middlewares/ST/STM32_USB_Device_Library/Core/Inc
     Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc
+    Middlewares/u8g2
 )
 
 # source directories
@@ -52,6 +53,7 @@ add_subdirectory(Src)
 add_subdirectory(Drivers/STM32L1xx_HAL_Driver/Src)
 add_subdirectory(Middlewares/ST/STM32_USB_Device_Library/Core/Src)
 add_subdirectory(Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Src)
+add_subdirectory(Middlewares/u8g2)
 add_subdirectory(App)
 
 add_custom_target(
