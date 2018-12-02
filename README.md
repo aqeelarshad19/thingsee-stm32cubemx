@@ -6,8 +6,6 @@ The project is using CMake for compilation, so please don't use the generated `M
 
 ## Important Directories
 
-The directories are organized like in normal STM32CubeMX project, so the following directories are those, which where added manually.
-
 * **App**: Directory for the application code
 * **Drivers/thingsee**: Sources for the peripheral drivers
 * **Middlewares/u8g2**: Graphic/Display library for the OLED-Display
