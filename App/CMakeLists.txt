@@ -1,3 +1,5 @@
 add_library(App 
-    entry.cxx
+    app.cxx
+    Display.cxx
+    Serial.cxx
 )
