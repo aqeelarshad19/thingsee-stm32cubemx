@@ -10,7 +10,6 @@ extern "C" SPI_HandleTypeDef hspi2;
 void DisplayClass::begin()
 {
   HAL_GPIO_WritePin(DISPLAY_REGULATOR_GPIO_Port, DISPLAY_REGULATOR_Pin, GPIO_PIN_SET);
-  HAL_Delay(500);
   HAL_SPI_Init(&hspi2);
   init();
 }
@@ -59,70 +58,55 @@ void DisplayClass::init()
 
   writeCommand(0xAE); // display off
 
-  HAL_Delay(20);
-
   writeCommand(0xD5); // clock
-  HAL_Delay(20);
+
   writeCommand(0x81); // upper nibble is rate, lower nibble is divisor
-  HAL_Delay(20);
 
   writeCommand(0xA8); // mux ratio
-  HAL_Delay(20);
+
   writeCommand(0x3F); // rtfm
-  HAL_Delay(20);
 
   writeCommand(0xD3); // display offset
-  HAL_Delay(20);
+
   writeCommand(0x00); // rtfm
-  HAL_Delay(20);
+
   writeCommand(0x00);
 
-  HAL_Delay(20);
   writeCommand(0x8D); // charge pump
-  HAL_Delay(20);
+
   writeCommand(0x14); // enable
-  HAL_Delay(20);
 
   writeCommand(0x20); // memory addr mode
-  HAL_Delay(20);
+
   writeCommand(0x00); // horizontal
-  HAL_Delay(20);
 
   writeCommand(0xA1); // segment remap
-  HAL_Delay(20);
 
   writeCommand(0xA5); // display on
-  HAL_Delay(20);
 
   writeCommand(0xC8); // com scan direction
-  HAL_Delay(20);
+
   writeCommand(0xDA); // com hardware cfg
-  HAL_Delay(20);
+
   writeCommand(0x12); // alt com cfg
-  HAL_Delay(20);
 
   writeCommand(0x81); // contrast aka current
-  HAL_Delay(20);
+
   writeCommand(0x7F); // 128 is midpoint
-  HAL_Delay(20);
 
   writeCommand(0xD9); // precharge
-  HAL_Delay(20);
+
   writeCommand(0x11); // rtfm
-  HAL_Delay(20);
 
   writeCommand(0xDB); // vcomh deselect level
-  HAL_Delay(20);
+
   writeCommand(0x20); // rtfm
-  HAL_Delay(20);
 
   writeCommand(0xA6); // non-inverted
-  HAL_Delay(20);
 
   writeCommand(0xA4); // display scan on
-  HAL_Delay(20);
+
   writeCommand(0xAF); // drivers on
-  HAL_Delay(20);
 }
 
 void DisplayClass::setAddressMode(AddressMode mode)

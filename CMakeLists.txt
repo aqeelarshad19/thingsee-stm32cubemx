@@ -5,7 +5,7 @@ set(CMAKE_TOOLCHAIN_FILE "${CMAKE_SOURCE_DIR}/cmake/arm-gcc-toolchain.cmake")
 include(${CMAKE_SOURCE_DIR}/cmake/utils.cmake)
 
 # define project name
-project(c12880ma-firmware)
+project(thingsee)
 
 # set build configuration to debug
 set(CMAKE_BUILD_TYPE Debug)
@@ -61,11 +61,3 @@ add_custom_target(
     COMMENT "Flashing ${CMAKE_BINARY_DIR}/Src/firmware.bin with dfu-util..."
     USES_TERMINAL
 )
-
-# add_custom_target(
-#     debug_server 
-#     COMMAND openocd -f board/stm32l4discovery.cfg
-#     DEPENDS firmware
-#     COMMENT "Starting OpenOCD debug server..."
-#     USES_TERMINAL
-# )
