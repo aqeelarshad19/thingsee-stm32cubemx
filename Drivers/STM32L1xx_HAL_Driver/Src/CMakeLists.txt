@@ -1,0 +1,25 @@
+add_library(HAL 
+    stm32l1xx_hal_rtc.c
+    stm32l1xx_hal_adc.c
+    stm32l1xx_hal_rtc_ex.c
+    stm32l1xx_hal_flash_ramfunc.c
+    stm32l1xx_hal_cortex.c
+    stm32l1xx_hal_pwr_ex.c
+    stm32l1xx_hal_tim_ex.c
+    stm32l1xx_hal_rcc_ex.c
+    stm32l1xx_hal_spi_ex.c
+    stm32l1xx_hal_spi.c
+    stm32l1xx_hal_pcd.c
+    stm32l1xx_hal_flash_ex.c
+    stm32l1xx_hal_uart.c
+    stm32l1xx_hal_adc_ex.c
+    stm32l1xx_hal_flash.c
+    stm32l1xx_hal_tim.c
+    stm32l1xx_hal_dma.c
+    stm32l1xx_hal_pwr.c
+    stm32l1xx_hal.c
+    stm32l1xx_hal_i2c.c
+    stm32l1xx_hal_rcc.c
+    stm32l1xx_hal_gpio.c
+    stm32l1xx_hal_pcd_ex.c
+)
