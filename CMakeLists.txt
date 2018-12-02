@@ -43,6 +43,7 @@ include_directories(
     Drivers/STM32L1xx_HAL_Driver/Inc/Legacy
     Drivers/CMSIS/Device/ST/STM32L1xx/Include
     Drivers/CMSIS/Include
+    Drivers/thingsee
     Middlewares/ST/STM32_USB_Device_Library/Core/Inc
     Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc
     Middlewares/u8g2
@@ -51,6 +52,7 @@ include_directories(
 # source directories
 add_subdirectory(Src)
 add_subdirectory(Drivers/STM32L1xx_HAL_Driver/Src)
+add_subdirectory(Drivers/thingsee)
 add_subdirectory(Middlewares/ST/STM32_USB_Device_Library/Core/Src)
 add_subdirectory(Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Src)
 add_subdirectory(Middlewares/u8g2)

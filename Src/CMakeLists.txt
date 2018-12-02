@@ -9,7 +9,7 @@ add_executable(firmware
     usbd_cdc_if.c 
     usbd_conf.c
 )
-target_link_libraries(firmware c m nosys App u8g2 HAL UsbCore UsbClass)
+target_link_libraries(firmware c m nosys App Thingsee u8g2 HAL UsbCore UsbClass)
 
 firmware_size(firmware)
 generate_object(firmware .bin binary)
