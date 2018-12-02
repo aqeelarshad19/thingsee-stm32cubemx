@@ -2,7 +2,7 @@
 
 This repository constains a basic firmware for the Thingsee ONE, which is based on STM32CubeMX.
 The high-level and board specific code is written in C++.
-The project is using CMake for compilation, so please don't use the generated `Makefile` to build!
+The project is using CMake as build system.
 
 ## Important Directories
 
