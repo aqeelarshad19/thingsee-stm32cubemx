@@ -52,7 +52,7 @@
 #include "usb_device.h"
 
 /* USER CODE BEGIN Includes */
-#include "firmware.h"
+#include "app.h"
 /* USER CODE END Includes */
 
 /* Private variables ---------------------------------------------------------*/
@@ -69,7 +69,6 @@ SPI_HandleTypeDef hspi3;
 
 UART_HandleTypeDef huart5;
 UART_HandleTypeDef huart2;
-UART_HandleTypeDef huart3;
 
 /* USER CODE BEGIN PV */
 /* Private variables ---------------------------------------------------------*/
@@ -84,7 +83,6 @@ static void MX_RTC_Init(void);
 static void MX_I2C1_Init(void);
 static void MX_I2C2_Init(void);
 static void MX_USART2_UART_Init(void);
-static void MX_USART3_UART_Init(void);
 static void MX_UART5_Init(void);
 static void MX_SPI2_Init(void);
 static void MX_SPI1_Init(void);
@@ -134,7 +132,6 @@ int main(void)
   MX_I2C1_Init();
   MX_I2C2_Init();
   MX_USART2_UART_Init();
-  MX_USART3_UART_Init();
   MX_UART5_Init();
   MX_SPI2_Init();
   MX_SPI1_Init();
@@ -150,12 +147,13 @@ int main(void)
   while (1)
   {
 
-    /* USER CODE END WHILE */
+  /* USER CODE END WHILE */
 
-    /* USER CODE BEGIN 3 */
+  /* USER CODE BEGIN 3 */
     loop();
   }
   /* USER CODE END 3 */
+
 }
 
 /**
@@ -169,13 +167,14 @@ void SystemClock_Config(void)
   RCC_ClkInitTypeDef RCC_ClkInitStruct;
   RCC_PeriphCLKInitTypeDef PeriphClkInit;
 
-  /**Configure the main internal regulator output voltage 
+    /**Configure the main internal regulator output voltage 
     */
   __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE1);
 
-  /**Initializes the CPU, AHB and APB busses clocks 
+    /**Initializes the CPU, AHB and APB busses clocks 
     */
-  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSI | RCC_OSCILLATORTYPE_LSI | RCC_OSCILLATORTYPE_HSE;
+  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSI|RCC_OSCILLATORTYPE_LSI
+                              |RCC_OSCILLATORTYPE_HSE;
   RCC_OscInitStruct.HSEState = RCC_HSE_ON;
   RCC_OscInitStruct.HSIState = RCC_HSI_ON;
   RCC_OscInitStruct.HSICalibrationValue = 16;
@@ -189,9 +188,10 @@ void SystemClock_Config(void)
     _Error_Handler(__FILE__, __LINE__);
   }
 
-  /**Initializes the CPU, AHB and APB busses clocks 
+    /**Initializes the CPU, AHB and APB busses clocks 
     */
-  RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2;
+  RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
+                              |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2;
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
   RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV1;
@@ -209,11 +209,11 @@ void SystemClock_Config(void)
     _Error_Handler(__FILE__, __LINE__);
   }
 
-  /**Configure the Systick interrupt time 
+    /**Configure the Systick interrupt time 
     */
-  HAL_SYSTICK_Config(HAL_RCC_GetHCLKFreq() / 1000);
+  HAL_SYSTICK_Config(HAL_RCC_GetHCLKFreq()/1000);
 
-  /**Configure the Systick 
+    /**Configure the Systick 
     */
   HAL_SYSTICK_CLKSourceConfig(SYSTICK_CLKSOURCE_HCLK);
 
@@ -227,7 +227,7 @@ static void MX_ADC_Init(void)
 
   ADC_ChannelConfTypeDef sConfig;
 
-  /**Configure the global features of the ADC (Clock, Resolution, Data Alignment and number of conversion) 
+    /**Configure the global features of the ADC (Clock, Resolution, Data Alignment and number of conversion) 
     */
   hadc.Instance = ADC1;
   hadc.Init.ClockPrescaler = ADC_CLOCK_ASYNC_DIV1;
@@ -249,7 +249,7 @@ static void MX_ADC_Init(void)
     _Error_Handler(__FILE__, __LINE__);
   }
 
-  /**Configure for the selected ADC regular channel its corresponding rank in the sequencer and its sample time. 
+    /**Configure for the selected ADC regular channel its corresponding rank in the sequencer and its sample time. 
     */
   sConfig.Channel = ADC_CHANNEL_9;
   sConfig.Rank = ADC_REGULAR_RANK_1;
@@ -258,6 +258,7 @@ static void MX_ADC_Init(void)
   {
     _Error_Handler(__FILE__, __LINE__);
   }
+
 }
 
 /* I2C1 init function */
@@ -277,6 +278,7 @@ static void MX_I2C1_Init(void)
   {
     _Error_Handler(__FILE__, __LINE__);
   }
+
 }
 
 /* I2C2 init function */
@@ -296,6 +298,7 @@ static void MX_I2C2_Init(void)
   {
     _Error_Handler(__FILE__, __LINE__);
   }
+
 }
 
 /* RTC init function */
@@ -310,7 +313,7 @@ static void MX_RTC_Init(void)
 
   /* USER CODE END RTC_Init 1 */
 
-  /**Initialize RTC Only 
+    /**Initialize RTC Only 
     */
   hrtc.Instance = RTC;
   hrtc.Init.HourFormat = RTC_HOURFORMAT_24;
@@ -323,6 +326,7 @@ static void MX_RTC_Init(void)
   {
     _Error_Handler(__FILE__, __LINE__);
   }
+
 }
 
 /* SPI1 init function */
@@ -346,6 +350,7 @@ static void MX_SPI1_Init(void)
   {
     _Error_Handler(__FILE__, __LINE__);
   }
+
 }
 
 /* SPI2 init function */
@@ -357,10 +362,10 @@ static void MX_SPI2_Init(void)
   hspi2.Init.Mode = SPI_MODE_MASTER;
   hspi2.Init.Direction = SPI_DIRECTION_2LINES;
   hspi2.Init.DataSize = SPI_DATASIZE_8BIT;
-  hspi2.Init.CLKPolarity = SPI_POLARITY_LOW;
+  hspi2.Init.CLKPolarity = SPI_POLARITY_HIGH;
   hspi2.Init.CLKPhase = SPI_PHASE_1EDGE;
   hspi2.Init.NSS = SPI_NSS_SOFT;
-  hspi2.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_2;
+  hspi2.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_32;
   hspi2.Init.FirstBit = SPI_FIRSTBIT_MSB;
   hspi2.Init.TIMode = SPI_TIMODE_DISABLE;
   hspi2.Init.CRCCalculation = SPI_CRCCALCULATION_DISABLE;
@@ -369,6 +374,7 @@ static void MX_SPI2_Init(void)
   {
     _Error_Handler(__FILE__, __LINE__);
   }
+
 }
 
 /* SPI3 init function */
@@ -392,6 +398,7 @@ static void MX_SPI3_Init(void)
   {
     _Error_Handler(__FILE__, __LINE__);
   }
+
 }
 
 /* UART5 init function */
@@ -410,6 +417,7 @@ static void MX_UART5_Init(void)
   {
     _Error_Handler(__FILE__, __LINE__);
   }
+
 }
 
 /* USART2 init function */
@@ -428,24 +436,7 @@ static void MX_USART2_UART_Init(void)
   {
     _Error_Handler(__FILE__, __LINE__);
   }
-}
 
-/* USART3 init function */
-static void MX_USART3_UART_Init(void)
-{
-
-  huart3.Instance = USART3;
-  huart3.Init.BaudRate = 115200;
-  huart3.Init.WordLength = UART_WORDLENGTH_8B;
-  huart3.Init.StopBits = UART_STOPBITS_1;
-  huart3.Init.Parity = UART_PARITY_NONE;
-  huart3.Init.Mode = UART_MODE_TX_RX;
-  huart3.Init.HwFlowCtl = UART_HWCONTROL_NONE;
-  huart3.Init.OverSampling = UART_OVERSAMPLING_16;
-  if (HAL_UART_Init(&huart3) != HAL_OK)
-  {
-    _Error_Handler(__FILE__, __LINE__);
-  }
 }
 
 /** Configure pins as 
@@ -469,33 +460,39 @@ static void MX_GPIO_Init(void)
   __HAL_RCC_GPIOA_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOD, PAD_J9010_Pin | LED1_Pin | REGULATOR_BLUETOOTH_Pin | REGULATOR_WLAN_Pin | SSD1309_CMDDATA_Pin | SSD1309_RESET_Pin | REGULATOR_SDCARD_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOD, PAD_J9010_Pin|LED1_Pin|BLUETOOTH_REGULATOR_Pin|WLAN_REGULATOR_Pin 
+                          |DISPLAY_CMDDATA_Pin|DISPLAY_RESET_Pin|SDCARD_REGULATOR_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(CHIP_SELECT_WLAN_GPIO_Port, CHIP_SELECT_WLAN_Pin, GPIO_PIN_SET);
+  HAL_GPIO_WritePin(WLAN_CS_GPIO_Port, WLAN_CS_Pin, GPIO_PIN_SET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOB, REGULATOR_GPS_Pin | REGULATOR_DISPLAY_Pin | PWR_SWITCH_CAPSENSE_9AXIS_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOB, GPS_REGULATOR_Pin|DISPLAY_REGULATOR_Pin|PWR_SWITCH_CAPSENSE_9AXIS_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOE, CTRL_VBAT_Pin | WIFI_EN_Pin | LSM9DS1_DEN_AG_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOE, VBAT_CTRL_Pin|WLAN_EN_Pin|LSM9DS1_DEN_AG_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOH, GPIO_PIN_2, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOA, PAD_J9005_Pin | PAD_J9006_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOA, PAD_J9005_Pin|PAD_J9006_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOC, MODEM_RESET_N_Pin | PAD_J9008_Pin | MODEM_POWER_ON_Pin | PAD_J9007_Pin | HWWDG_DONE_Pin | BQ24251_CE_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOC, MODEM_RESET_N_Pin|MODEM_POWER_ON_Pin, GPIO_PIN_SET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOD, CHIP_SELECT_SDCARD_Pin | CHIP_SELECT_DISPLAY_Pin, GPIO_PIN_SET);
+  HAL_GPIO_WritePin(GPIOC, PAD_J9008_Pin|PAD_J9007_Pin|HWWDG_DONE_Pin|BQ24251_CE_Pin, GPIO_PIN_RESET);
 
-  /*Configure GPIO pins : PAD_J9010_Pin LED1_Pin REGULATOR_BLUETOOTH_Pin REGULATOR_WLAN_Pin 
-                           SSD1309_CMDDATA_Pin SSD1309_RESET_Pin CHIP_SELECT_SDCARD_Pin CHIP_SELECT_DISPLAY_Pin 
-                           REGULATOR_SDCARD_Pin */
-  GPIO_InitStruct.Pin = PAD_J9010_Pin | LED1_Pin | REGULATOR_BLUETOOTH_Pin | REGULATOR_WLAN_Pin | SSD1309_CMDDATA_Pin | SSD1309_RESET_Pin | CHIP_SELECT_SDCARD_Pin | CHIP_SELECT_DISPLAY_Pin | REGULATOR_SDCARD_Pin;
+  /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(GPIOD, SDCARD_CS_Pin|DISPLAY_CS_Pin, GPIO_PIN_SET);
+
+  /*Configure GPIO pins : PAD_J9010_Pin LED1_Pin BLUETOOTH_REGULATOR_Pin WLAN_REGULATOR_Pin 
+                           DISPLAY_CMDDATA_Pin DISPLAY_RESET_Pin SDCARD_CS_Pin DISPLAY_CS_Pin 
+                           SDCARD_REGULATOR_Pin */
+  GPIO_InitStruct.Pin = PAD_J9010_Pin|LED1_Pin|BLUETOOTH_REGULATOR_Pin|WLAN_REGULATOR_Pin 
+                          |DISPLAY_CMDDATA_Pin|DISPLAY_RESET_Pin|SDCARD_CS_Pin|DISPLAY_CS_Pin 
+                          |SDCARD_REGULATOR_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
@@ -507,15 +504,15 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(MBR3108_INT_GPIO_Port, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : CHIP_SELECT_WLAN_Pin CTRL_VBAT_Pin WIFI_EN_Pin LSM9DS1_DEN_AG_Pin */
-  GPIO_InitStruct.Pin = CHIP_SELECT_WLAN_Pin | CTRL_VBAT_Pin | WIFI_EN_Pin | LSM9DS1_DEN_AG_Pin;
+  /*Configure GPIO pins : WLAN_CS_Pin VBAT_CTRL_Pin WLAN_EN_Pin LSM9DS1_DEN_AG_Pin */
+  GPIO_InitStruct.Pin = WLAN_CS_Pin|VBAT_CTRL_Pin|WLAN_EN_Pin|LSM9DS1_DEN_AG_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
   HAL_GPIO_Init(GPIOE, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : REGULATOR_GPS_Pin REGULATOR_DISPLAY_Pin PWR_SWITCH_CAPSENSE_9AXIS_Pin */
-  GPIO_InitStruct.Pin = REGULATOR_GPS_Pin | REGULATOR_DISPLAY_Pin | PWR_SWITCH_CAPSENSE_9AXIS_Pin;
+  /*Configure GPIO pins : GPS_REGULATOR_Pin DISPLAY_REGULATOR_Pin PWR_SWITCH_CAPSENSE_9AXIS_Pin */
+  GPIO_InitStruct.Pin = GPS_REGULATOR_Pin|DISPLAY_REGULATOR_Pin|PWR_SWITCH_CAPSENSE_9AXIS_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
@@ -529,23 +526,31 @@ static void MX_GPIO_Init(void)
   HAL_GPIO_Init(GPIOH, &GPIO_InitStruct);
 
   /*Configure GPIO pins : LIS2DH_INT1_Pin HTS221_INT_Pin LSM9DS1_DRDY_M_Pin LSM9DS1_INT_M_Pin 
-                           LSM9DS1_INT1_AG_Pin WIFI_INT_Pin LSM9DS1_INT2_AG_Pin LPS25H_PRES_INT_Pin 
+                           LSM9DS1_INT1_AG_Pin WLAN_INT_Pin LSM9DS1_INT2_AG_Pin LPS25H_PRES_INT_Pin 
                            LIS2DH_INT2_Pin */
-  GPIO_InitStruct.Pin = LIS2DH_INT1_Pin | HTS221_INT_Pin | LSM9DS1_DRDY_M_Pin | LSM9DS1_INT_M_Pin | LSM9DS1_INT1_AG_Pin | WIFI_INT_Pin | LSM9DS1_INT2_AG_Pin | LPS25H_PRES_INT_Pin | LIS2DH_INT2_Pin;
+  GPIO_InitStruct.Pin = LIS2DH_INT1_Pin|HTS221_INT_Pin|LSM9DS1_DRDY_M_Pin|LSM9DS1_INT_M_Pin 
+                          |LSM9DS1_INT1_AG_Pin|WLAN_INT_Pin|LSM9DS1_INT2_AG_Pin|LPS25H_PRES_INT_Pin 
+                          |LIS2DH_INT2_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(GPIOE, &GPIO_InitStruct);
 
   /*Configure GPIO pins : PAD_J9005_Pin PAD_J9006_Pin */
-  GPIO_InitStruct.Pin = PAD_J9005_Pin | PAD_J9006_Pin;
+  GPIO_InitStruct.Pin = PAD_J9005_Pin|PAD_J9006_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : MODEM_RESET_N_Pin PAD_J9008_Pin MODEM_POWER_ON_Pin PAD_J9007_Pin 
-                           HWWDG_DONE_Pin BQ24251_CE_Pin */
-  GPIO_InitStruct.Pin = MODEM_RESET_N_Pin | PAD_J9008_Pin | MODEM_POWER_ON_Pin | PAD_J9007_Pin | HWWDG_DONE_Pin | BQ24251_CE_Pin;
+  /*Configure GPIO pins : MODEM_RESET_N_Pin MODEM_POWER_ON_Pin */
+  GPIO_InitStruct.Pin = MODEM_RESET_N_Pin|MODEM_POWER_ON_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_OD;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
+  HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
+
+  /*Configure GPIO pins : PAD_J9008_Pin PAD_J9007_Pin HWWDG_DONE_Pin BQ24251_CE_Pin */
+  GPIO_InitStruct.Pin = PAD_J9008_Pin|PAD_J9007_Pin|HWWDG_DONE_Pin|BQ24251_CE_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
@@ -568,6 +573,7 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(BQ24251_STAT_GPIO_Port, &GPIO_InitStruct);
+
 }
 
 /* USER CODE BEGIN 4 */
@@ -590,7 +596,7 @@ void _Error_Handler(char *file, int line)
   /* USER CODE END Error_Handler_Debug */
 }
 
-#ifdef USE_FULL_ASSERT
+#ifdef  USE_FULL_ASSERT
 /**
   * @brief  Reports the name of the source file and the source line number
   *         where the assert_param error has occurred.
@@ -598,8 +604,8 @@ void _Error_Handler(char *file, int line)
   * @param  line: assert_param error line source number
   * @retval None
   */
-void assert_failed(uint8_t *file, uint32_t line)
-{
+void assert_failed(uint8_t* file, uint32_t line)
+{ 
   /* USER CODE BEGIN 6 */
   /* User can add his own implementation to report the file name and line number,
      tex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
